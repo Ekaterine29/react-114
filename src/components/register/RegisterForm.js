@@ -12,8 +12,10 @@ export const RegisterForm = () => {
       formValues:registerFormValues,
       onFormChange:onRegisterInputChange,
     } = useForm({defaultFormValues:generateRegisterFormValues() });
+    
+    const {authenticateUser} =useUser();
 
-     const {authenticateUser}= useUser();
+
 
      const onRegister = ()=>{
      
