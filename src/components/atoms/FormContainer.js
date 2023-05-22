@@ -3,7 +3,7 @@ import React from 'react';
 
 export const FormContainer = ({children}) => {
   return (
-    <FormControl fullwidth sx={{marginTop:'15px'}} >
+    <FormControl fullWidth sx={{marginTop:'15px'}} >
         {children}
         
     </FormControl>

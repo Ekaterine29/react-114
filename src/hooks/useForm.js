@@ -1,16 +1,19 @@
 import {useState} from 'react';
 
-export const useForm= ({defaultFormValue}) =>{
-    const [formValues,setFormValues]=useState(defaultFormValue);
+export const useForm= ({defaultFormValues}) =>{
+    const [formValues,setFormValues]=useState(defaultFormValues);
     
-    const onInputChange = (e) => {
+    const onFormChange = (e) => {
         const {name,value}=e.target;
     
         const {validateInput}= formValues[name];
 
         setFormValues((prevFormValues)=>{
+            console.log(prevFormValues,'name',name,'value',value);
+           
             return {
                 ...prevFormValues,
+                
                 [name]:{
                     ...prevFormValues[name],
                     value,
@@ -24,24 +27,7 @@ const clearForm= (obj) => {
 };
 return {
     formValues,
-    onInputChange,
-    clearForm
+    onFormChange,
+    clearForm,
 };
-};
-const x={
-email:{
-    value: '',
-    required:true,
-    error:null,
-    validateInput:(email)=>
-    email.includes('@gmail.com') ? '' : 'email is not valid',
-
-},
-password: {
-    value: '',
-    required: true,
-    error: null,
-    validateInput:(password) =>
-    password.length >6 ? '' : 'passwordshould have at least 6 characters',
-},
 };

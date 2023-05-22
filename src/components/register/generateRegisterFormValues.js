@@ -19,7 +19,7 @@ export const generateRegisterFormValues = () => {
             required:true,
             error:'',
             validateInput:(email)=>
-            email.includes('@getMaxListeners.com') ? null : 'email is not valid',
+            email.includes('@gmail.com') ? null : 'email is not valid',
         },
         password:{
             value:'',
