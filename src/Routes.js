@@ -1,13 +1,24 @@
 import React from 'react';
 import {Route,Routes} from 'react-router-dom';
-import { HomePage, LoginPage, RegisterPage } from './pages';
+import { HomePage, LoginPage, ProductFormPage, RegisterPage } from './pages';
+import { ProtectedRoute, isUserAdmin } from './helpers';
+import { useUser } from './hooks';
 
 export const RoutesComponent = () => {
+    const {userData}=useUser();
     return (
         <Routes>
             <Route path='/'element={<HomePage/>} />
             <Route path='/register' element={<RegisterPage/>} />
             <Route path='/login' element={<LoginPage/>} />
+            <Route 
+            path='/products/new' 
+            element={
+                <ProtectedRoute isUserAdmin={isUserAdmin(userData)}>
+            <ProductFormPage/>
+                </ProtectedRoute>
+            } 
+            />
         </Routes>
     );
 };

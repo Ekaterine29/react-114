@@ -22,12 +22,14 @@ export const LoginForm = () => {
     <FormContainer>
        <Input
           name='email'
+          label='email'
           value={loginFormValues.email.value}
           onChange={onLoginFormChange}
           error={loginFormValues.email.error}
          />
         <Input
          name='password' 
+         label='password'
          value={loginFormValues.password.value}
           onChange={onLoginFormChange}
            error={loginFormValues.password.error}
