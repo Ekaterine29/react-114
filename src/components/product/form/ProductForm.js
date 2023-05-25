@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
-import { FormContainer, Input } from '../../atoms';
+import React, { useEffect, useState } from 'react';
+import { Button, FormContainer, Input } from '../../atoms';
 import { useForm } from '../../../hooks';
 import { generateProductFormValues } from './generateProductFormValues';
 import Filebase from 'react-file-base64';
+import { useProduct } from '../../../hooks/useProduct';
 
  export const ProductForm = () => {
 
-    const {formValues:productFormValues,onChange:onProductFormChange}=
-    useForm({defaultFormValues:generateProductFormValues});
+    const {formValues:productFormValues,onFormChange:onProductFormChange,setFormValues,
+    }=
+    useForm({defaultFormValues:generateProductFormValues() });
+
+    const {saveProduct,selectedProduct}=useProduct();
     const [image,setImage]=useState('');
+
+    useEffect(()=>{
+      if (selectedProduct){
+        // setFormValues();
+
+      }
+    },[selectedProduct]);
+
+    const onSave=() =>{
+        const name=productFormValues.name.value;
+        const description=productFormValues.description.value;
+        const brand=productFormValues.brand.value;
+        const category=productFormValues.category.value;
+        const price=productFormValues.price.value;
+        saveProduct({name,description,brand,category,price,image});
+    };
    
   return (
     <FormContainer>
@@ -52,6 +72,7 @@ import Filebase from 'react-file-base64';
 
                }}
                 />
+                <Button onClick={onSave}>save product</Button>
 
     </FormContainer>
   );

@@ -1,7 +1,7 @@
-export const generateProductFormValues=() =>{
+export const generateProductFormValues=(selectedProduct) =>{
     return {
         name:{
-            value:'',
+            value:selectedProduct?.name || '',
             required  :true,
         error:'',
     validateInput: (name) =>
@@ -9,21 +9,21 @@ export const generateProductFormValues=() =>{
 
 },
 description:{
-    value: '',
+    value: selectedProduct?.description || '',
     required:true,
     error:'',
     validateInput:(description) =>
     description.length >1  ? null: 'description should have at least 2 character',
 },
 category:{
-    value: '',
+    value:selectedProduct?.category ||  '',
     required:true,
     error:'',
     validateInput:(category) =>
     category.length >1 ? null: 'category should have at least 32character',
 },
 brand : {
-    value:'',
+    value:selectedProduct?.brand || '',
     required:true,
     error:'',
     validateInput:(brand) =>
@@ -31,7 +31,7 @@ brand : {
   
 },
 price:{
-    value: '',
+    value: selectedProduct?.price || 0,
     required:true,
     error:'',
     validateInput:(price) =>
