@@ -7,7 +7,7 @@ import { useProduct } from './hooks/useProduct';
 
 const StyledContentContainer =styled(Box)(({theme}) =>({
   [theme.breakpoints.up('sm')]: {
-    mrginLeft:'255px',
+    marginLeft:'255px',
   },
   marginTop:'60px',
   height:'calc(100vh-64px)',

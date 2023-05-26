@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use(async(request)=>{
     if (!token && !refreshToken) return request;
 
     // set authorization headers
-    request.headers.Authorization=`Beared ${token}`;
+    request.headers.Authorization=`Bearer ${token}`;
 
     // tokenis vadis shemowmeba
     const expirationDate=decode(token).exp;

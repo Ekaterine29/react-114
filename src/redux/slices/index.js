@@ -6,4 +6,6 @@ export {productReducer,
 
 } from './productSlice';
 
+export  {cartReducer,addToCart,removeFromCart} from './Cart';
+
     

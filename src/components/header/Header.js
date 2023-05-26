@@ -5,14 +5,14 @@ import { UserIcon } from './UserIcon';
 
 
 const StyleAppBar=styled(AppBar)(({theme})=>({
-   background:'red',
+  
 
    [theme.breakpoints.down('sm')]:{
     width:'100%',
     backgroundColor:'green',
    },
    [theme.breakpoints.up('sm')]:{
-    width:'calc(100%-255px)',
+    width:'calc(100% - 255px)',
     backgroundColor:'teal',
    },
    padding:'0 37px 0 30px',
