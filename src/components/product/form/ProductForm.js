@@ -7,7 +7,7 @@ import { useProduct } from '../../../hooks/useProduct';
 
  export const ProductForm = () => {
 
-    const {formValues:productFormValues,onFormChange:onProductFormChange,setFormValues,
+    const {formValues:productFormValues,onFormChange:onProductFormChange
     }=
     useForm({defaultFormValues:generateProductFormValues() });
 
@@ -67,7 +67,7 @@ import { useProduct } from '../../../hooks/useProduct';
              error={productFormValues.price.error}
               label='Product price'
                />
-               <Filebase type='file' multiple={false} onDone={(base64) =>{
+               <Filebase type='file' multiple={false} onDone={({base64}) =>{
                 setImage(base64);
 
                }}

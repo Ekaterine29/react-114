@@ -1,8 +1,9 @@
 import React from 'react';
 import {Route,Routes} from 'react-router-dom';
-import { HomePage, LoginPage, ProductFormPage, RegisterPage } from './pages';
+import { CategoryProductsPage, HomePage, LoginPage, ProductFormPage, RegisterPage } from './pages';
 import { ProtectedRoute, isUserAdmin } from './helpers';
 import { useUser } from './hooks';
+import { CardContent } from '@mui/material';
 
 export const RoutesComponent = () => {
     const {userData}=useUser();
@@ -27,6 +28,11 @@ export const RoutesComponent = () => {
                 </ProtectedRoute>
             } 
             />
+
+            <Route
+             path='/products/categories/:categoryName'
+              element={<CategoryProductsPage/>}
+              />
         </Routes>
     );
 };

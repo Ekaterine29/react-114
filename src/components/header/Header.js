@@ -1,7 +1,9 @@
 import { AppBar, Box, Toolbar, styled } from '@mui/material';
-import React from 'react';
-import { Link } from '../atoms';
+import React, { useState } from 'react';
+import { Button, Link } from '../atoms';
 import { UserIcon } from './UserIcon';
+import { CartDrawer } from './CartDrawer';
+import { UseCart } from '../../hooks';
 
 
 const StyleAppBar=styled(AppBar)(({theme})=>({
@@ -27,13 +29,26 @@ const StyledToolBar=styled(Toolbar)(() => ({
 }))
 ;
 
-export const Header = () => {
+export const Header = ({setDrawerOpen}) => {
+    const [isCartOpen,setIsCartOpen]=useState(false);
+  
+
+    const {cartItems}=UseCart();
   return (
     <Box>
+       
         <StyleAppBar>
             <StyledToolBar>
-                <Link linkTo='/'>Home</Link>
+                <Button 
+                onClick={()=>setDrawerOpen((prev)=>!prev)} 
+                sx={{display:{sm:'none'}}}
+                >hi
+                </Button>
+                <Link to='/'>Home</Link>
                 <UserIcon/>
+                <Button
+                 onClick={()=>setIsCartOpen(true)}>open cart</Button>
+                <CartDrawer isCartOpen={isCartOpen} cartItems={cartItems} setIsCartOpen={setIsCartOpen}/>
             </StyledToolBar>
         </StyleAppBar>
         </Box>
