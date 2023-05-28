@@ -4,10 +4,12 @@ export {productReducer,
     fetchHomePageProducts,
     fetchCategoryProducts,
     setSelectedProduct,
+    fetchSingleProduct
 
 } from './productSlice';
 
-export  {cartReducer,
+export  {
+    cartReducer,
     addToCart,
     removeFromCart,
     saveCart,

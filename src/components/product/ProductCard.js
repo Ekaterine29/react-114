@@ -27,7 +27,7 @@ const StyledCardActionsContainer=styled(Box)(()=>({
 
  export const ProductCard = ({product}) => {
 
-    const {name,id,image,price,category}=product;
+    const {name,_id,image,price,category}=product;
     const {userData}=useUser();
 
     const navigate=useNavigate();
@@ -45,7 +45,7 @@ const StyledCardActionsContainer=styled(Box)(()=>({
   return (
      <Grid Item>
      <styledCard>
-        <Link>
+        <Link to={`/products/categories/${category}/${_id}`}>
         <img
         src={image}
         alt={`${category}-${name}`} 

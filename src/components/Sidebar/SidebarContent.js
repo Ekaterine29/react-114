@@ -11,13 +11,13 @@ const StyledListItem=styled(ListItem)(()=>({
  export const SidebarContent = ({categories}) => {
   return(
      <>
-     <SidebarHeader></SidebarHeader>
+     <SidebarHeader/>
      <List>
         {categories.map((item)=>{
             const {_id,name}=item;
             return (
                 <React.Fragment key={_id}>
-                    <Link to={`/products/categories/${name}`}>
+                    <Link to={`/products/categories/${name}?page=1&sort=price,desc`}>
                         <Box sx={{display:'flex'}}>
                             <StyledListItem>
                                 <ListItemText secondary={name}/>

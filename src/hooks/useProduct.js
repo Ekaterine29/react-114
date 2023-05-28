@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { saveProduct as SaveProductHandler, 
+import { saveProduct as saveProductHandler, 
   fetchCategoryProducts as fetchProductsByCategory, 
   fetchHomePageProducts,
-  setSelectedProduct as selectProduct
+  setSelectedProduct as selectProduct,
+  fetchSingleProduct,
+ 
+ 
  } from "../redux/slices";
 import { useNavigate } from "react-router-dom";
 
@@ -34,10 +37,15 @@ export const useProduct=()=> {
     dispatch(fetchProductsByCategory(url));
    };
 
+   
+  const getSingleProduct=()=>{
+    dispatch(fetchSingleProduct());
+  };
+
   const saveProduct=(data) =>{
-    console.log('DATA',data);
+   
     dispatch(
-      SaveProductHandler({
+      saveProductHandler({
         product:data.product,
       isUpdating:data.isUpdating,
       id: data.id,
@@ -60,5 +68,6 @@ export const useProduct=()=> {
     saveProduct,
     getHomePageProducts,
     setSelectedProduct,
+    getSingleProduct,
   };
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route,Routes} from 'react-router-dom';
-import { CategoryProductsPage, HomePage, LoginPage, ProductFormPage, RegisterPage } from './pages';
+import { CategoryProductsPage, HomePage, LoginPage, ProductFormPage, RegisterPage, SingleProductPage } from './pages';
 import { ProtectedRoute, isUserAdmin } from './helpers';
 import { useUser } from './hooks';
-import { CardContent } from '@mui/material';
+
 
 export const RoutesComponent = () => {
     const {userData}=useUser();
@@ -33,6 +33,11 @@ export const RoutesComponent = () => {
              path='/products/categories/:categoryName'
               element={<CategoryProductsPage/>}
               />
-        </Routes>
+
+            <Route
+             path='/products/categories/:categoryName/:id'
+              element={<SingleProductPage/>}
+              />
+            </Routes>
     );
 };
