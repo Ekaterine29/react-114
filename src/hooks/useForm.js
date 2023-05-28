@@ -9,7 +9,7 @@ export const useForm= ({defaultFormValues}) =>{
         const {validateInput}= formValues[name];
 
         setFormValues((prevFormValues)=>{
-            console.log(prevFormValues,'name',name,'value',value);
+           
            
             return {
                 ...prevFormValues,

@@ -1,19 +1,30 @@
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helpers";
 
- export const saveProduct= createAsyncThunk(
+export const saveProduct = createAsyncThunk(
     'product/saveProduct',
-    async({product},{rejectWithValue,dispatch}) => {
-        try {
-            const {data} = await axiosInstance.post('/products',{product});
-            dispatch(fetchHomePageProducts);
-            return data;
-        } catch (error) {
-            return rejectWithValue('could not save product');
-
+    async ({ product, isUpdating, id }, { rejectWithValue, dispatch }) => {
+      try {
+        let endpoint;
+        let method;
+  
+        if (isUpdating) {
+          endpoint = `/product/${id}`;
+          method = 'put';
+        } else {
+          endpoint = '/product';
+          method = 'post';
         }
+  
+        const { data } = await axiosInstance[method](endpoint, { product });
+        dispatch(fetchHomePageProducts());
+        return data;
+      } catch (error) {
+        return rejectWithValue('Could not save product');
+      }
     }
- ) ;
+  );
+  
 
  export const fetchHomePageProducts=createAsyncThunk(
     'product/fetchHomePageProducts',

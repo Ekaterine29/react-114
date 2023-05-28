@@ -1,8 +1,15 @@
+import { Pagination } from '@mui/material';
 import React from 'react';
 
- export const Paginate = () => {
+ export const Paginate = ({totalPages,currentPage,changePage}) => {
   return (
-    <div>Paginate</div>
+    <Pagination 
+    count={totalPages}
+    page={Number(currentPage)}
+    onChange={(_,value)=>{
+      changePage('page',value);
+    }}
+    />
   );
 };
 
