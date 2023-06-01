@@ -29,7 +29,7 @@ import { useProduct } from '../../hooks/useProduct';
      </Drawer>
 
      <Drawer
-      variant ='temporary'
+      variant ='permanent'
       open={isDrawerOpen} 
       onClose={()=>{
          setDrawerOpen(!isDrawerOpen);

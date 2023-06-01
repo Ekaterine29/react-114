@@ -18,10 +18,11 @@ const StyledContentContainer =styled(Box)(({theme}) =>({
 }));
 
 const App = () => {
+  const {getHomePageProducts}=useProduct();
   const {userData}=useUser();
   const {fetchCart}=UseCart();
-  const {getHomePageProducts}=useProduct();
-  const [isDrawerOpen,setDrawerOpen]=useState(false);
+ 
+  const [isDrawerOpen,setIsDrawerOpen]=useState(false);
  
   useEffect(() =>{
     getHomePageProducts();
@@ -38,9 +39,9 @@ const App = () => {
 
   return (
     <Box>
-    <Header setDrawerOpen={setDrawerOpen}/>
+    <Header setDrawerOpen={setIsDrawerOpen}/>
     <StyledContentContainer>
-      <Sidebar isDrawerOpen={isDrawerOpen} setDrawerOpen={setDrawerOpen}/>
+      <Sidebar isDrawerOpen={isDrawerOpen} setDrawerOpen={setIsDrawerOpen}/>
     <RoutesComponent/>
 
     </StyledContentContainer>

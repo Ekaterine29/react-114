@@ -29,7 +29,7 @@ const StyledToolBar=styled(Toolbar)(() => ({
 }))
 ;
 
-export const Header = ({setDrawerOpen}) => {
+export const Header = ({setIsDrawerOpen}) => {
     const [isCartOpen,setIsCartOpen]=useState(false);
   
 
@@ -40,7 +40,7 @@ export const Header = ({setDrawerOpen}) => {
         <StyleAppBar>
             <StyledToolBar>
                 <Button 
-                onClick={()=>setDrawerOpen((prev)=>!prev)} 
+                onClick={()=>setIsDrawerOpen((prev)=>!prev)} 
                 sx={{display:{sm:'none'}}}
                 >hi
                 </Button>

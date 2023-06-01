@@ -69,5 +69,6 @@ export const useProduct=()=> {
     getHomePageProducts,
     setSelectedProduct,
     getSingleProduct,
+    fetchCategoryProducts,
   };
 };
