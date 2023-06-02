@@ -17,7 +17,7 @@ export const fetchCart=createAsyncThunk(
    'cart/saveCart',
     async ({userId,cartItems},{dispatch,rejectWithValue})=>{
         try {
-        await axiosInstance.put(`/users/${userId}/cart`,{product: cartItems});
+        await axiosInstance.put(`/users/${userId}/cart`,{products: cartItems});
         dispatch(fetchCart(userId));
     } catch (error) {
         return rejectWithValue('could not save Cart');
@@ -44,12 +44,12 @@ const cartSlice=createSlice({
                 (item)=>item.product._id ===productId
             );
             if  (cartItem) {
-                const updatedCart=state.cartItems.map((item)=>
+                const updateCart=state.cartItems.map((item)=>
                 item.product._id===productId
                 ? {...item,quantity:item.quantity +1}
                 :item
                 );
-                state.cartItems=updatedCart;
+                state.cartItems=updateCart;
             } else {
                 state.cartItems.push({product,quantity:1});
             }
@@ -62,7 +62,7 @@ const cartSlice=createSlice({
                 );
                 if (cartItem.quantity===1){
                     // waishalos
-                    state.cartItems=state.cartItems.filter((item)=>item.product._id===productId
+                    state.cartItems=state.cartItems.filter((item)=>item.product._id !==productId
                     );
 
                 } else {

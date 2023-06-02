@@ -5,7 +5,7 @@ import { useProduct } from '../../hooks/useProduct';
 
  export const SearchBar = () => {
     const [searchQuery,setSearchQuery]=useState("");
-    const {searchProducts,searchResults,clearSearchResults}=useProduct();
+    const {searchProducts,searchResults,clearSearchResults,getHomePageProducts}=useProduct();
 
     useEffect(()=>{
       const timerId=setTimeout(()=>{
@@ -13,6 +13,7 @@ import { useProduct } from '../../hooks/useProduct';
           searchProducts(searchQuery);
         } else {
           clearSearchResults();
+          getHomePageProducts();
         }
       },500);
         return ()=> {
@@ -24,9 +25,9 @@ import { useProduct } from '../../hooks/useProduct';
   return(
    <Autocomplete 
    freeSolo 
-   sx={{width:300}}
+   sx={{width:400}}
    disableClearable
-   options={[searchResults]}
+   options={searchResults}
    getOptionLabel={(option) =>option.name}
    renderOption={(_,option) =>{
     const {name,category,_id,price}=option;

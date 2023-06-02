@@ -4,13 +4,13 @@ import { ProductCard } from './ProductCard';
 import { GridContainer, LoadingWrapper } from '../atoms';
 
  export const HomePageProducts = () => {
-  const {homePageProducts,isProductLoading}=useProduct()
+  const {homePageProducts,isProductLoading}=useProduct();
   return (
      <LoadingWrapper isLoading={isProductLoading}> 
      <GridContainer>
-      {homePageProducts.map((item)=>{
-      <ProductCard product={item}/>
-      } )} 
+      {homePageProducts.map((item) => (
+      <ProductCard product={item} key={item._id}/>
+   ) )} 
       </GridContainer>
   </LoadingWrapper>
   );

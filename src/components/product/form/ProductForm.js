@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Button, FormContainer, Input } from '../../atoms';
 import { useForm } from '../../../hooks';
 import { generateProductFormValues } from './generateProductFormValues';
-import Filebase from 'react-file-base64';
+import Filebase from "react-file-base64";
 import { useProduct } from '../../../hooks/useProduct';
 
  export const ProductForm = () => {
 
-    const {formValues:productFormValues,onFormChange:onProductFormChange
+    const {formValues:productFormValues,onFormChange:onProductFormChange,setFormValues,
     }=
     useForm({defaultFormValues:generateProductFormValues() });
 
@@ -16,8 +16,8 @@ import { useProduct } from '../../../hooks/useProduct';
 
     useEffect(()=>{
       if (selectedProduct){
-        // setFormValues();
-
+        setFormValues(generateProductFormValues(selectedProduct));
+        setImage(selectedProduct?.image);
       }
     },[selectedProduct]);
 
@@ -27,7 +27,17 @@ import { useProduct } from '../../../hooks/useProduct';
         const brand=productFormValues.brand.value;
         const category=productFormValues.category.value;
         const price=productFormValues.price.value;
-        saveProduct({name,description,brand,category,price,image});
+        saveProduct({
+          product:{name,
+            description,
+            brand,
+            category,
+            price,
+            image,
+          },
+          isUpdating:!!selectedProduct,
+          id:selectedProduct?._id,
+        });
     };
    
   return (

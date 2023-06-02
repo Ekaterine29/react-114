@@ -82,7 +82,7 @@ export const saveProduct = createAsyncThunk(
         "product/queryProducts",
         async (searchValue,{rejectWithValue})=>{
             try {
-                const {data}=await axiosInstance.get(`/products?name=${searchValue}`);
+                const {data}=await axiosInstance.get(`/products/search?name=${searchValue}`);
                 return data;
             } catch (error) {
                 return rejectWithValue("product not found");
@@ -120,13 +120,13 @@ const productSlice=createSlice({
         builder.addCase(fetchHomePageProducts.fulfilled,(state,action) => {
             state.loading=false;
             state.categories=action.payload.categories;
-            state.homePageProducts=action.payload.products;
-           
-            
+            state.homePageProducts=action.payload.products;   
         });
         builder.addCase(fetchHomePageProducts.rejected,(state,action)=>{
             state.loading=false;
             state.error=action.payload;
+
+
         });
         builder.addCase(saveProduct.pending,(state) =>{
          state.loading=true;
@@ -139,26 +139,27 @@ const productSlice=createSlice({
             state.loading=false;
             state.error=action.payload;
         });
+
+
         builder.addCase(fetchCategoryProducts.pending,(state) =>{
             state.loading=true;
         });
         builder.addCase(fetchCategoryProducts.fulfilled,(state,action) => {
             state.loading=false;
-            state.categoryProducts=action.payload;
-          
-           
-            
+            state.categoryProducts=action.payload;    
         });
         builder.addCase(fetchCategoryProducts.rejected,(state,action)=>{
             state.loading=false;
             state.error=action.payload;
         });
+
+        
         builder.addCase(fetchSingleProduct.pending,(state) =>{
             state.loading=true;
         });
         builder.addCase(fetchSingleProduct.fulfilled,(state,action) => {
             state.loading=false;
-            state.singleProducts=action.payload.product; 
+            state.singleProduct=action.payload.product; 
         });
         builder.addCase(fetchSingleProduct.rejected,(state,action)=>{
             state.loading=false;
@@ -172,6 +173,7 @@ const productSlice=createSlice({
      builder.addCase(queryProducts.fulfilled,(state,action) => {
     state.loading=false;
     state.searchResults=action.payload.products; 
+    state.homePageProducts = action.payload.products;
 });
     builder.addCase(queryProducts.rejected,(state,action)=>{
     state.loading=false;

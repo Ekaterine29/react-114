@@ -11,19 +11,17 @@ import { SearchBar } from './SearchBar';
 
 
 const StyleAppBar=styled(AppBar)(({theme})=>({
+    background:'teal',
   
-
    [theme.breakpoints.down('sm')]:{
     width:'100%',
-    backgroundColor:'green',
+    backgroundColor:'teal',
    },
    [theme.breakpoints.up('sm')]:{
     width:'calc(100% - 255px)',
     backgroundColor:'teal',
    },
-   padding:'0 37px 0 30px',
-  
-   
+   padding:'0 37px 0 30px',  
 }));
 
 const StyledToolBar=styled(Toolbar)(() => ({
@@ -34,36 +32,35 @@ const StyledToolBar=styled(Toolbar)(() => ({
 ;
 
 export const Header = ({setIsDrawerOpen}) => {
-    const [isCartOpen,setIsCartOpen]=useState(false);
+ const [isCartOpen,setIsCartOpen]=useState(false);
   
+ const {cartItems}=UseCart();
 
-    const {cartItems}=UseCart();
   return (
     <Box>
-       
-        <StyleAppBar>
-            <StyledToolBar>
-                <Button 
-                onClick={()=>setIsDrawerOpen((prev)=>!prev)} 
-                sx={{display:{sm:'none'}}}
-                >
-                <BsLayoutSidebarInset size={35}/>
-                </Button>
-                <Link to='/'>
-                <AiFillHome size={35}/>
-                </Link>
-                <SearchBar/>
-                <UserIcon/>
-                <Button
-                 onClick={()=>setIsCartOpen(true)}>
-                 <AiOutlineShoppingCart size={35} color="black"/>
-                 </Button>
-                <CartDrawer 
-                isCartOpen={isCartOpen}
-                 cartItems={cartItems} 
-                 setIsCartOpen={setIsCartOpen}/>
-            </StyledToolBar>
-        </StyleAppBar>
-        </Box>
+    <StyleAppBar>
+     <StyledToolBar>
+      <Button 
+        onClick={()=>setIsDrawerOpen((prev)=>!prev)} 
+         sx={{display:{sm:'none'}}}
+    >
+    <BsLayoutSidebarInset size={35}/>
+     </Button>
+     <Link to='/'>
+    <AiFillHome size={35}/>
+    </Link>
+    <SearchBar/>
+     <UserIcon/>
+     <Button
+         onClick={()=>setIsCartOpen(true)}>
+        <AiOutlineShoppingCart size={35} color="black"/>
+    </Button>
+    <CartDrawer 
+        isCartOpen={isCartOpen}
+        cartItems={cartItems} 
+        setIsCartOpen={setIsCartOpen}/>
+    </StyledToolBar>
+    </StyleAppBar>
+ </Box>
   );
 };

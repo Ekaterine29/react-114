@@ -34,7 +34,6 @@ const StyledBox=styled(Box)(() =>({
 
      <StyledBox>
           {!!userData ? (
-            <Box>
          <MenuItem>
           <Button 
           onClick={() =>{
@@ -44,18 +43,17 @@ const StyledBox=styled(Box)(() =>({
           >
             logout
             </Button>
-            <MenuItem>
-            {isUserAdmin(userData) && <Button onClick={()=>{
+            
+            {isUserAdmin(userData) && (
+              <Button
+               onClick={()=>{
               navigate('/products/new');
-              setAnchor(null);
-
+              setAnchor(null)
             }}
             >
-              add product</Button>}
-            </MenuItem>
-          </MenuItem>
-          </Box>
-        
+              add product</Button>
+          )}
+            </MenuItem>         
     ) : (
      <Box>
         <MenuItem>
@@ -78,8 +76,7 @@ const StyledBox=styled(Box)(() =>({
             register
             </Button>
          </MenuItem>
-         </Box>
-                
+         </Box>       
          )}
          </StyledBox>
        </Menu>

@@ -31,7 +31,7 @@ const StyledButtonContainer=styled(Box)(()=>({
         const {product,quantity} = item;
         const {price,name,_id,image}=product;
         return ( 
-        <StyledCartItem>
+        <StyledCartItem key={_id}>
             <img
              src={image}
              alt={`${name}-img`}
@@ -40,28 +40,32 @@ const StyledButtonContainer=styled(Box)(()=>({
              style={{objectFit:'cover', borderRadius:5}}
              
              />
-             <Box sx={{paddindLeft:5}}>
+             <Box sx={{paddindLeft:3}}>
                 <Text>{name}</Text>
-                <Text>quantity:{quantity}</Text>
-                <Text>total:${price * quantity}</Text>
+                <Text>Quantity:{quantity}</Text>
+                <Text>Total:${price * quantity}</Text>
              </Box>
              </StyledCartItem>
              );
     })}
-             <StyledButtonContainer>
-                <Button onClick={()=>clearCart(userData?._id)}>clear cart</Button>
-                {!!userData && (
-                    <Button
-                    onClick={()=>{
-                    saveCart({userId:userData?._id,cartItems});
-                    }}
-         >
-                    save Cart
-                    </Button>
-                )}
-             </StyledButtonContainer>
+     <StyledButtonContainer>
+     <Button
+    onClick={()=>clearCart(userData._id)}
+    >
+    clear cart
+    </Button>
+     {!!userData && (
+    <Button
+    onClick={()=>{
+    saveCart({userId:userData?._id,cartItems});
+    }}
+   >
+    save Cart
+    </Button>
+    )}
+     </StyledButtonContainer>
 
-       </Drawer>
+    </Drawer>
   );
 
 };
