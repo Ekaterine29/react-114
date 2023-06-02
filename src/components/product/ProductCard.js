@@ -1,21 +1,22 @@
-import { Box, Card, CardActions, Grid, styled } from '@mui/material';
+import { Box, Card, CardActions, Grid, Rating, styled } from '@mui/material';
 import React from 'react';
 import { Button, Link, Text } from '../atoms';
 import { UseCart, useUser } from '../../hooks';
 import { isUserAdmin } from '../../helpers';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useProduct } from '../../hooks/useProduct';
 
-const styledCard=styled(Card)(()=>({
-    width:350,
+
+const StyledCard=styled(Card)(()=>({
+    width:370,
     borderRadius:3,
 }));
 
-const styledInfoContainer=styled(Box)(()=>({
+const StyledInfoContainer=styled(Box)(()=>({
     display:'flex',
     flexDirection:'column',
     justifyContent:'space-between',
-    padding:'0 10p',
+    padding:'0 10px',
 
 }));
 const StyledCardActionsContainer=styled(Box)(()=>({
@@ -27,12 +28,14 @@ const StyledCardActionsContainer=styled(Box)(()=>({
 
  export const ProductCard = ({product}) => {
 
-    const {name,_id,image,price,category}=product;
+    const {name,_id,image,price,category,averageRating}=product;
     const {userData}=useUser();
 
     const navigate=useNavigate();
-    const {setSelectedProduct}=useProduct();
+    const {setSelectedProduct,rateProducts}=useProduct();
     const {addToCart,removeFromCart,cartItems}=UseCart();
+    const {pathname,search}=useLocation();
+ 
 
     const onEdit=()=>{
         navigate(`/products/edit/${name}`);
@@ -41,23 +44,36 @@ const StyledCardActionsContainer=styled(Box)(()=>({
 
     const isProductInCart=cartItems?.find((item)=>item.product._id===_id);
 
+    const onRatingChange=(e)=>{
+        const {value}=e.target;
+        rateProducts({
+            productId:_id,
+            userId:userData?._id,
+            rating:Number(value),
+            isHome:pathname==="/",
+            url:`${category}${search}&size=1`,
+        });
+    };
+
 
   return (
      <Grid Item>
-     <styledCard>
+     <StyledCard>
         <Link to={`/products/categories/${category}/${_id}`}>
         <img
         src={image}
         alt={`${category}-${name}`} 
         style={{objectFit:'cover',width:'100%', height:'200px'}}
         />
-        <styledInfoContainer>
+        <StyledInfoContainer>
             <Text>{name}</Text>
             <Text>${price}</Text>
-        </styledInfoContainer>
+        </StyledInfoContainer>
         </Link>
-        <CardActions>
+        <CardActions sx={{display:"flex",flexDirection:"column",alignItems:"flex-start"}}>
+
             <StyledCardActionsContainer>
+            <Rating value={averageRating} disabled={!userData} onChange={onRatingChange}/>
                 {isProductInCart ? (
                 <>
                 <Button onClick={()=>removeFromCart(_id)}>-</Button>
@@ -68,14 +84,13 @@ const StyledCardActionsContainer=styled(Box)(()=>({
                     
                 <Button onClick={()=>addToCart(product)}>addto cart</Button>
                )}
-                <Button>remove from cart</Button>
                 {isUserAdmin(userData) && (
                 <Button onClick={onEdit}>edit product</Button>
                 )}
 
             </StyledCardActionsContainer>
         </CardActions>
-     </styledCard>
+     </StyledCard>
     </Grid>
     );
   

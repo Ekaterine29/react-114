@@ -29,20 +29,20 @@ const StyledButtonContainer=styled(Box)(()=>({
     >
     {cartItems.map((item) => {
         const {product,quantity} = item;
-        const {price,name,id,image}=product;
+        const {price,name,_id,image}=product;
         return ( 
         <StyledCartItem>
             <img
              src={image}
              alt={`${name}-img`}
              width='70px'
-             height='70p'
+             height='70px'
              style={{objectFit:'cover', borderRadius:5}}
              
              />
              <Box sx={{paddindLeft:5}}>
                 <Text>{name}</Text>
-                <Text>{quantity}</Text>
+                <Text>quantity:{quantity}</Text>
                 <Text>total:${price * quantity}</Text>
              </Box>
              </StyledCartItem>

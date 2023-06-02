@@ -1,5 +1,5 @@
 import React from 'react';
-import {CategoryProductList} from '../components/product/category products/categoryProductList';
+import {CategoryProductList} from '../components/product/categoryProducts/CategoryProductList';
 
 
  export const CategoryProductsPage = () => {

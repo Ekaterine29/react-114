@@ -4,6 +4,9 @@ import { saveProduct as saveProductHandler,
   fetchHomePageProducts,
   setSelectedProduct as selectProduct,
   fetchSingleProduct,
+  rateProduct,
+  queryProducts,
+  clearSearchResults as clearQueryResults,
  
  
  } from "../redux/slices";
@@ -21,6 +24,9 @@ export const useProduct=()=> {
 
    const isProductLoading=useSelector((state)=>state.product.loading);
    const categories=useSelector((state)=>state.product.categories);
+   const singleProduct=useSelector((state)=>state.product.singleProduct);
+
+   const searchResults=useSelector((state)=>state.product.searchResults);
    const categoryProducts=useSelector((state)=>state.product.categoryProducts);
 
   const navigate=useNavigate();
@@ -58,6 +64,16 @@ export const useProduct=()=> {
       navigate('/');
   });
 };
+ const rateProducts=(data)=>{
+  dispatch(rateProduct(data));
+ };
+
+ const searchProducts=(data)=>{
+  dispatch(queryProducts(data));
+ };
+ const clearSearchResults=()=>{
+  dispatch(clearQueryResults());
+ };
 
   return{
     homePageProducts,
@@ -65,10 +81,16 @@ export const useProduct=()=> {
     selectedProduct,
     categories,
     categoryProducts,
+    singleProduct,
+    searchResults,
     saveProduct,
     getHomePageProducts,
+    fetchCategoryProducts,
     setSelectedProduct,
     getSingleProduct,
-    fetchCategoryProducts,
+    rateProducts,
+    searchProducts,
+    clearSearchResults,
+    
   };
 };

@@ -10,16 +10,13 @@ export const saveProduct = createAsyncThunk(
        const {data}=await axiosInstance[method](endpoint,{product});
        dispatch(fetchHomePageProducts());
        return data;
+      
       } catch (error) {
         return rejectWithValue('could not save product');
 
       }
       }
       );
-
-    
-    
-  
 
  export const fetchHomePageProducts=createAsyncThunk(
     'product/fetchHomePageProducts',
@@ -55,9 +52,43 @@ export const saveProduct = createAsyncThunk(
         return data;  
     } catch (error)   {        
 
-     rejectWithValue('could not fetch product');
+    return rejectWithValue('could not fetch product');
    }
  });
+
+  export const rateProduct=createAsyncThunk(
+    "product/rateProduct",
+    async (
+        {productId,userId,rating,isHome,url},{rejectWithValue,dispatch})=>{
+        try {
+            await axiosInstance.post(`/products/${productId}/users/${userId}/rate`,
+            {rating,
+
+            });
+            if (isHome) {
+                dispatch(fetchHomePageProducts());
+            }else {
+                dispatch(fetchCategoryProducts(url));
+            }
+        } catch (error) {
+            return rejectWithValue("could not rate product");
+
+        }
+    }
+    );
+
+
+    export const queryProducts=createAsyncThunk(
+        "product/queryProducts",
+        async (searchValue,{rejectWithValue})=>{
+            try {
+                const {data}=await axiosInstance.get(`/products?name=${searchValue}`);
+                return data;
+            } catch (error) {
+                return rejectWithValue("product not found");
+            }
+        }
+    );
 
 const productSlice=createSlice({
     name:'product',
@@ -71,10 +102,15 @@ const productSlice=createSlice({
         categoryProducts:{
             products:[],
         },
+        singleProduct:null,
+        searchResults:[],
     },
     reducers: {
         setSelectedProduct:(state,action)=>{
             state.selectedProduct=action.payload;
+        },
+        clearSearchResults:(state)=>{
+            state.searchResults=[];
         },
     },
     extraReducers:(builder) =>{
@@ -122,18 +158,29 @@ const productSlice=createSlice({
         });
         builder.addCase(fetchSingleProduct.fulfilled,(state,action) => {
             state.loading=false;
-            state.singleProducts=action.payload.product;
-          
-           
-            
+            state.singleProducts=action.payload.product; 
         });
         builder.addCase(fetchSingleProduct.rejected,(state,action)=>{
             state.loading=false;
             state.error=action.payload;
         });
 
-    },
+    
+     builder.addCase(queryProducts.pending,(state) =>{
+    state.loading=true;
 });
+     builder.addCase(queryProducts.fulfilled,(state,action) => {
+    state.loading=false;
+    state.searchResults=action.payload.products; 
+});
+    builder.addCase(queryProducts.rejected,(state,action)=>{
+    state.loading=false;
+    state.error=action.payload;
+});
+
+},
+});
+
 export const  productReducer=productSlice.reducer;
 
-export const {setSelectedProduct}=productSlice.actions;
+export const {setSelectedProduct,clearSearchResults}=productSlice.actions;

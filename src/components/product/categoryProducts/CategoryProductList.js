@@ -9,7 +9,7 @@ import { Sort } from './Sort';
 
  export const CategoryProductList = () => {
     const {categoryProducts,fetchCategoryProducts,isProductLoading}=useProduct();
-    const {products, totalPages}=categoryProducts();
+    const {products, totalPages}=categoryProducts;
     const {categoryName}=useParams();
     const {value:page,changeQueryValue:changePage}=useQueryParams('page');
     const {value:sort,changeQueryValue:changeSort}=useQueryParams('sort');
@@ -22,8 +22,8 @@ import { Sort } from './Sort';
     },[categoryName,page,sort]);
 
 
-    useEffect=(()=>{
-      changePage('page',1);
+    useEffect(()=>{
+      changePage('page',1); 
 
     },[sort]);
 

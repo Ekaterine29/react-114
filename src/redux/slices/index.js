@@ -3,8 +3,11 @@ export {productReducer,
     saveProduct,
     fetchHomePageProducts,
     fetchCategoryProducts,
+    fetchSingleProduct,
+    rateProduct,
+    queryProducts,
     setSelectedProduct,
-    fetchSingleProduct
+    clearSearchResults,
 
 } from './productSlice';
 
