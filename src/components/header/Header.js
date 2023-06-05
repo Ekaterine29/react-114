@@ -31,7 +31,7 @@ const StyledToolBar=styled(Toolbar)(() => ({
 }))
 ;
 
-export const Header = ({setIsDrawerOpen}) => {
+export const Header = ({setDrawerOpen}) => {
  const [isCartOpen,setIsCartOpen]=useState(false);
   
  const {cartItems}=UseCart();
@@ -41,7 +41,7 @@ export const Header = ({setIsDrawerOpen}) => {
     <StyleAppBar>
      <StyledToolBar>
       <Button 
-        onClick={()=>setIsDrawerOpen((prev)=>!prev)} 
+        onClick={()=>setDrawerOpen((prev)=>!prev)} 
          sx={{display:{sm:'none'}}}
     >
     <BsLayoutSidebarInset size={35}/>

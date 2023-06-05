@@ -18,7 +18,7 @@ const StyledImage=styled('img')(()=>({
   const {image,name,category,brand,description}=product;
   return (
     <StyledBox>
-   <StyledImage src={image}/>
+   <StyledImage src={product.image}/>
    <Box>
    <Text variant="h4">{name}</Text>
    <Text variant="h4">{category}</Text>

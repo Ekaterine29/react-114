@@ -5,7 +5,7 @@ import { useProduct } from '../../hooks/useProduct';
 
  export const SearchBar = () => {
     const [searchQuery,setSearchQuery]=useState("");
-    const {searchProducts,searchResults,clearSearchResults,getHomePageProducts}=useProduct();
+    const {searchProducts,searchResults,clearSearchResults}=useProduct();
 
     useEffect(()=>{
       const timerId=setTimeout(()=>{
@@ -13,9 +13,9 @@ import { useProduct } from '../../hooks/useProduct';
           searchProducts(searchQuery);
         } else {
           clearSearchResults();
-          getHomePageProducts();
+          
         }
-      },500);
+      },300);
         return ()=> {
           clearTimeout(timerId);
         };

@@ -30,16 +30,13 @@ import { useProduct } from '../../hooks/useProduct';
 
      <Drawer
       variant ='permanent'
-      open={isDrawerOpen} 
-      onClose={()=>{
-         setDrawerOpen(!isDrawerOpen);
-      }}
+      open
       ModalProps={{
          keepMounted:true,
  
       }}
       sx={{
-         display:{ xs:'black',sm:'none'},
+         display:{ sm:'block',xs:'none'},
          '& .MuiDrawer-paper':{
              boxSizing:'border-box',
              width:'255px',

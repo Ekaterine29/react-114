@@ -16,13 +16,14 @@ const StyledInfoContainer=styled(Box)(()=>({
     display:'flex',
    
     justifyContent:'space-between',
-    padding:'0 10px',
+    padding:'0 20px',
 
 }));
 const StyledCardActionsContainer=styled(Box)(()=>({
     display:'flex',
     justifyContent:'space-between',
     alignItems:'center',
+    gap:"7px",
 
 }));
 
@@ -69,7 +70,8 @@ const StyledCardActionsContainer=styled(Box)(()=>({
         <img
         src={image}
         alt={`${category}-${name}`} 
-        style={{objectFit:'cover',width:'100%', height:'200px'}}
+        style={{objectFit:'cover',width:'100%', height:'150px'
+    }}
         />
         <StyledInfoContainer>
             <Text>{name}</Text>

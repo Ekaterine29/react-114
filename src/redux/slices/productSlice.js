@@ -173,7 +173,7 @@ const productSlice=createSlice({
      builder.addCase(queryProducts.fulfilled,(state,action) => {
     state.loading=false;
     state.searchResults=action.payload.products; 
-    state.homePageProducts = action.payload.products;
+   
 });
     builder.addCase(queryProducts.rejected,(state,action)=>{
     state.loading=false;

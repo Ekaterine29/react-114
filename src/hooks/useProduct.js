@@ -44,8 +44,8 @@ export const useProduct=()=> {
    };
 
    
-  const getSingleProduct=()=>{
-    dispatch(fetchSingleProduct());
+  const getSingleProduct=(data)=>{
+    dispatch(fetchSingleProduct(data));
   };
 
   const saveProduct=(data) =>{

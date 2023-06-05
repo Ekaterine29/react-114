@@ -13,7 +13,7 @@ import { SingleProductCard } from './SingleProductCard';
   useEffect(()=>{
     getSingleProduct({category:categoryName,id});
 
-  },[]);
+  },[id,categoryName]);
 
   return  (
   <LoadingWrapper isLoading={isProductLoading || !singleProduct}>
